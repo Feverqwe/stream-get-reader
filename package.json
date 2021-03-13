@@ -1,7 +1,10 @@
 {
   "name": "stream-get-reader",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Stream reader, something like ReadableStream.getReader",
+  "homepage": "https://github.com/Feverqwe/stream-get-reader",
+  "bugs": "https://github.com/Feverqwe/stream-get-reader/issues",
+  "repository": "github:feverqwe/stream-get-reader",
   "main": "dist/StreamReader.js",
   "scripts": {
     "_clean": "del-cli ./dist",
