@@ -13,10 +13,10 @@ declare class StreamReader {
     private waitFn;
     constructor(stream: Readable);
     read(): Promise<{
-        done: boolean;
+        done: true;
         data: null;
     } | {
-        done: boolean;
+        done: false;
         data: Buffer;
     }>;
     private onData;

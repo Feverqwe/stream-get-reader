@@ -28,7 +28,7 @@ class StreamReader {
     stream.on('data', this.onData);
   }
 
-  public async read() {
+  public async read(): Promise<{done: true, data: null} | {done: false, data: Buffer}> {
     // debug('read');
     if (this.chunksBufferLen === 0) {
       await this.readUntil();
