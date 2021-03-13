@@ -8,7 +8,6 @@ class StreamReader {
         this.chunksBuffer = [];
         this.chunksBufferLen = 0;
         this.streamEnded = false;
-        this.streamErr = null;
         this.streamFinished = false;
         this.destroyed = false;
         this.waitFn = null;
@@ -22,7 +21,6 @@ class StreamReader {
         };
         this.bufferSize = stream.readableHighWaterMark;
         this.finishedDisposer = stream_1.finished(stream, (err) => {
-            // debug('finished: %O', err || 'ok');
             this.cleanup();
             this.streamFinished = true;
             if (err) {
@@ -36,7 +34,6 @@ class StreamReader {
         stream.on('data', this.onData);
     }
     async read() {
-        // debug('read');
         if (this.chunksBufferLen === 0) {
             await this.readUntil();
         }
@@ -48,14 +45,12 @@ class StreamReader {
         this.chunksBufferLen -= chunkLen;
         if (!this.streamFinished && this.chunksBufferLen < this.bufferSize) {
             if (this.stream.isPaused()) {
-                // debug('background resume');
                 this.stream.resume();
             }
         }
         return { done: false, data: chunk };
     }
     async readUntil() {
-        // debug('readUntil');
         if (this.streamErr)
             throw this.streamErr;
         if (this.destroyed || this.streamEnded)
@@ -75,8 +70,7 @@ class StreamReader {
         this.finishedDisposer();
         this.stream.off('data', this.onData);
     }
-    destroy() {
-        // debug('destroy');
+    destroy(err) {
         this.destroyed = true;
         this.cleanup();
         this.chunksBuffer.splice(0);
@@ -87,7 +81,7 @@ class StreamReader {
         this.stream.once('error', (err) => {
             // pass
         });
-        this.stream.destroy(this.streamErr = new Error('StreamReader destroyed'));
+        this.stream.destroy(this.streamErr = err);
         this.waitFn && this.waitFn();
     }
 }

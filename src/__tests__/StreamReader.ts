@@ -113,7 +113,7 @@ describe('streamReader', () => {
       while (true) {
         const readPromise = reader.read();
         if (readLen > 5 * MB) {
-          reader.destroy();
+          reader.destroy(new Error('Aborted'));
         }
         const {done, data} = await readPromise;
         if (done) break;
@@ -123,7 +123,7 @@ describe('streamReader', () => {
       err = _err;
     }
 
-    expect(err).toMatchObject({message: 'StreamReader destroyed'});
+    expect(err).toMatchObject({message: 'Aborted'});
   });
 
   test('destroy before read', async () => {
@@ -136,7 +136,7 @@ describe('streamReader', () => {
       const reader = getStreamReader(stream);
       while (true) {
         if (readLen > 5 * MB) {
-          reader.destroy();
+          reader.destroy(new Error('Aborted'));
         }
         const {done, data} = await reader.read();
         if (done) break;
@@ -146,7 +146,7 @@ describe('streamReader', () => {
       err = _err;
     }
 
-    expect(err).toMatchObject({message: 'StreamReader destroyed'});
+    expect(err).toMatchObject({message: 'Aborted'});
   });
 
   test('destroy after read', async () => {
@@ -162,14 +162,14 @@ describe('streamReader', () => {
         if (done) break;
         readLen += data!.byteLength;
         if (readLen > 5 * MB) {
-          reader.destroy();
+          reader.destroy(new Error('Aborted'));
         }
       }
     } catch (_err) {
       err = _err;
     }
 
-    expect(err).toMatchObject({message: 'StreamReader destroyed'})
+    expect(err).toMatchObject({message: 'Aborted'})
   });
 });
 

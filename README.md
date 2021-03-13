@@ -9,8 +9,8 @@ npm install stream-get-reader
 ## Usage
 
 ``` js
-const {getStreamReader} = require('stream-get-reader');
-const {Readable} = require('stream');
+import {getStreamReader} from "stream-get-reader";
+import {Readable} from "stream";
 
 const stream = Readable.from(Buffer.alloc(1024 * 1024));
 const reader = getStreamReader(stream);
@@ -22,3 +22,35 @@ while(true) {
 }
 
 ```
+
+## API
+
+### new StreamReader(Readable)
+
+``` js
+import StreamReader from "stream-get-reader";
+import {Readable} from "stream";
+
+const stream = Readable.from(Buffer.alloc(1024 * 1024));
+const reader = new StreamReader(stream);
+
+const {done, data} = await reader.read();
+
+reader.destroy();
+
+```
+
+#### StreamReader#read()
+
+- Returns: `Promise<{done: true, data: null} | {done: false, data: Buffer}>`
+
+The read() method pulls some data out of the buffer and returns it.
+If stream emit error, it throws error when buffer will be empty.
+If reader was destroyed it throw error if it was provided or provide will be done.
+
+#### StreamReader#destroy([error])
+
+- error `<Error>` Optional an error
+
+Destroy the reader and optionally provide an error.
+When you call destroy(), it calls stream.destroy(error) too.

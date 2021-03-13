@@ -22,7 +22,7 @@ declare class StreamReader {
     private onData;
     private readUntil;
     private cleanup;
-    destroy(): void;
+    destroy<T extends Error>(err?: T): void;
 }
 export declare function getStreamReader(stream: Readable): StreamReader;
 export default StreamReader;
