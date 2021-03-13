@@ -1,6 +1,6 @@
 {
   "name": "stream-get-reader",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Stream reader, something like ReadableStream.getReader",
   "homepage": "https://github.com/Feverqwe/stream-get-reader",
   "bugs": "https://github.com/Feverqwe/stream-get-reader/issues",
@@ -10,21 +10,23 @@
     "getReader"
   ],
   "main": "dist/StreamReader.js",
+  "types": "dist/mainBase.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "_clean": "del-cli ./dist",
-    "build": "npm run _clean && rollup -c ./rollup.config.js",
+    "build": "npm run _clean && tsc",
     "test": "jest"
   },
-  "author": "",
+  "author": "Anton V",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.1.0",
     "@types/jest": "^26.0.20",
     "cross-env": "^7.0.3",
     "debug": "^4.3.1",
     "del-cli": "^3.0.1",
     "jest": "^26.6.3",
-    "rollup": "^2.36.1",
     "ts-jest": "^26.5.3",
     "tslib": "^2.1.0",
     "typescript": "^4.1.3"
