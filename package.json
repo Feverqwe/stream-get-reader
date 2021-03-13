@@ -5,6 +5,7 @@
   "homepage": "https://github.com/Feverqwe/stream-get-reader",
   "bugs": "https://github.com/Feverqwe/stream-get-reader/issues",
   "repository": "github:feverqwe/stream-get-reader",
+  "keywords": ["stream", "getReader"],
   "main": "dist/StreamReader.js",
   "scripts": {
     "_clean": "del-cli ./dist",
