@@ -53,4 +53,4 @@ If reader was destroyed it throw error if it was provided or will be done.
 - error `<Error>` Optional an error
 
 Destroy the reader and optionally provide an error.
-When you call destroy(), it calls stream.destroy(error) too.
+When you call destroy(), it calls Readable.destroy(error) too.
