@@ -46,7 +46,7 @@ reader.destroy();
 
 The read() method pulls some data out of the buffer and returns it.
 If stream emit error, it throws error when buffer will be empty.
-If reader was destroyed it throw error if it was provided or provide will be done.
+If reader was destroyed it throw error if it was provided or will be done.
 
 #### StreamReader#destroy([error])
 
