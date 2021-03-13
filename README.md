@@ -10,6 +10,7 @@ npm install stream-get-reader
 
 ``` js
 const {getStreamReader} = require('stream-get-reader');
+const {Readable} = require('stream');
 
 const stream = Readable.from(Buffer.alloc(1024 * 1024));
 const reader = getStreamReader(stream);
