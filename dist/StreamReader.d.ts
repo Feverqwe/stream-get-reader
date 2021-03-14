@@ -14,10 +14,10 @@ declare class StreamReader {
     constructor(stream: Readable);
     read(): Promise<{
         done: true;
-        data: null;
+        value: undefined;
     } | {
         done: false;
-        data: Buffer;
+        value: Buffer;
     }>;
     private onData;
     private readUntil;

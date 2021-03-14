@@ -39,7 +39,7 @@ class StreamReader {
         }
         const chunk = this.chunksBuffer.shift();
         if (chunk === undefined) {
-            return { done: true, data: null };
+            return { done: true, value: undefined };
         }
         const chunkLen = chunk.byteLength;
         this.chunksBufferLen -= chunkLen;
@@ -48,7 +48,7 @@ class StreamReader {
                 this.stream.resume();
             }
         }
-        return { done: false, data: chunk };
+        return { done: false, value: chunk };
     }
     async readUntil() {
         if (this.streamErr)
