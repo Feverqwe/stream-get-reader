@@ -11,9 +11,9 @@ describe('streamReader', () => {
     const reader = getStreamReader(stream);
 
     while(true) {
-      const {done, data} = await reader.read();
+      const {done, value} = await reader.read();
       if (done) break;
-      console.log(data);
+      console.log(value);
     }
   });
 
@@ -24,9 +24,9 @@ describe('streamReader', () => {
     const reader = getStreamReader(stream);
     let readLen = 0;
     while (true) {
-      const {done, data} = await reader.read();
+      const {done, value} = await reader.read();
       if (done) break;
-      readLen += data!.byteLength;
+      readLen += value!.byteLength;
     }
 
     expect(readLen).toBe(readLen);
@@ -45,9 +45,9 @@ describe('streamReader', () => {
         if (readLen > 5 * MB) {
           stream.destroy(new Error('Force destroyed'));
         }
-        const {done, data} = await readPromise;
+        const {done, value} = await readPromise;
         if (done) break;
-        readLen += data!.byteLength;
+        readLen += value!.byteLength;
       }
     } catch (_err) {
       err = _err;
@@ -65,12 +65,12 @@ describe('streamReader', () => {
     try {
       const reader = getStreamReader(stream);
       while (true) {
-        const {done, data} = await reader.read();
+        const {done, value} = await reader.read();
         if (readLen > 5 * MB) {
           stream.destroy(new Error('Force destroyed'));
         }
         if (done) break;
-        readLen += data!.byteLength;
+        readLen += value!.byteLength;
       }
     } catch (_err) {
       err = _err;
@@ -91,9 +91,9 @@ describe('streamReader', () => {
         if (readLen > 5 * MB) {
           stream.destroy(new Error('Force destroyed'));
         }
-        const {done, data} = await reader.read();
+        const {done, value} = await reader.read();
         if (done) break;
-        readLen += data!.byteLength;
+        readLen += value!.byteLength;
       }
     } catch (_err) {
       err = _err;
@@ -115,9 +115,9 @@ describe('streamReader', () => {
         if (readLen > 5 * MB) {
           reader.destroy(new Error('Aborted'));
         }
-        const {done, data} = await readPromise;
+        const {done, value} = await readPromise;
         if (done) break;
-        readLen += data!.byteLength;
+        readLen += value!.byteLength;
       }
     } catch (_err) {
       err = _err;
@@ -138,9 +138,9 @@ describe('streamReader', () => {
         if (readLen > 5 * MB) {
           reader.destroy(new Error('Aborted'));
         }
-        const {done, data} = await reader.read();
+        const {done, value} = await reader.read();
         if (done) break;
-        readLen += data!.byteLength;
+        readLen += value!.byteLength;
       }
     } catch (_err) {
       err = _err;
@@ -158,9 +158,9 @@ describe('streamReader', () => {
     try {
       const reader = getStreamReader(stream);
       while (true) {
-        const {done, data} = await reader.read();
+        const {done, value} = await reader.read();
         if (done) break;
-        readLen += data!.byteLength;
+        readLen += value!.byteLength;
         if (readLen > 5 * MB) {
           reader.destroy(new Error('Aborted'));
         }

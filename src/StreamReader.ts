@@ -27,14 +27,14 @@ class StreamReader {
     stream.on('data', this.onData);
   }
 
-  public async read(): Promise<{done: true, data: null} | {done: false, data: Buffer}> {
+  public async read(): Promise<{done: true, value: undefined} | {done: false, value: Buffer}> {
     if (this.chunksBufferLen === 0) {
       await this.readUntil();
     }
 
     const chunk = this.chunksBuffer.shift();
     if (chunk === undefined) {
-      return {done: true, data: null};
+      return {done: true, value: undefined};
     }
 
     const chunkLen = chunk.byteLength;
@@ -46,7 +46,7 @@ class StreamReader {
       }
     }
 
-    return {done: false, data: chunk};
+    return {done: false, value: chunk};
   }
 
   private onData = (chunk: Buffer) => {

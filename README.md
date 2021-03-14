@@ -16,9 +16,9 @@ const stream = Readable.from(Buffer.alloc(1024 * 1024));
 const reader = getStreamReader(stream);
 
 while(true) {
-    const {done, data} = await reader.read();
+    const {done, value} = await reader.read();
     if (done) break;
-    console.log(data);
+    console.log(value);
 }
 
 ```
@@ -34,7 +34,7 @@ import {Readable} from "stream";
 const stream = Readable.from(Buffer.alloc(1024 * 1024));
 const reader = new StreamReader(stream);
 
-const {done, data} = await reader.read();
+const {done, value} = await reader.read();
 
 reader.destroy();
 
@@ -42,9 +42,9 @@ reader.destroy();
 
 #### reader.read()
 
-- Returns: `Promise<{done: true, data: null} | {done: false, data: Buffer}>`
+- Returns: `Promise<{done: true, value: undefined} | {done: false, value: Buffer}>`
 
-The `reader.read()` method pulls some data out of the buffer and returns it.
+The `reader.read()` method pulls some value out of the buffer and returns it.
 If stream emit error, it throws error when buffer will be empty.
 If reader was destroyed it throw error if it was provided or will be done.
 
