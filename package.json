@@ -12,7 +12,7 @@
     "buffer"
   ],
   "main": "dist/StreamReader.js",
-  "types": "dist/mainBase.d.ts",
+  "types": "dist/StreamReader.d.ts",
   "files": [
     "dist"
   ],
